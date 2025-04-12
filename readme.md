@@ -1,18 +1,18 @@
 # OpenStreetMap
 
-This document is meant to introduce the reader to OpenStreetMap - what it is, how to use it, and when and why you might want to. I will primarily write this for an audience that has some interest in making maps, especially in an urban setting, and who may want to go beyond maps (visuals) to think about how data can be used for analytic, spatial analysis applications. I hope the reader will have some familiarity with QGIS, and/or Python for which there will be some example code, but most of the information here should generalize to other applications as well.
+This document is meant to introduce the reader to OpenStreetMap - what it is, how to use it, and when and why you might want to. I will primarily write this for an audience that has some interest in making maps, and who may want to go beyond maps (visuals) to think about how data can be used for analytic, spatial analysis applications. I hope the reader will have some familiarity with QGIS, and/or Python for which there will be some example code, but most of the information here should generalize to other applications as well.
 
-I mean only to tease and entice here. OpenStreetMap is a deep, _deep_ resource and also a community. I myself have been involved in that community since 2012, when I first started mapping parts of my hometown in Ohio as a way of goofing off during a graduate course on spatial statistics. Since then, I've published many maps based on OpenStreetMap data, and in turn have contributed over two million individual map edits and counting. I mostly edit around Toronto now, where I live and work, as a data scientist for the City. Perhaps you'll find some of my work useful in your own projects.
+I mean only to tease and entice here. OpenStreetMap is a deep, _deep_ resource and also a community. I myself have been involved in that community since 2012, when I first started mapping parts of my hometown in Ohio as a way of goofing off during a graduate course on spatial statistics. Since then, I've published many maps based on OpenStreetMap data, and in turn have contributed over two million individual map edits and counting. I mostly edit around Toronto now, where I live and work, as a data scientist for the City. Perhaps you'll find some of my edits useful in your own projects.
 
 -Nate Wessel, Toronto, April 2025
 
 ## What is OpenStreetMap?
 
-OpenStreetMap (OSM) is a wide-ranging, collaborative mapping project spanning the entire world. You might think of it as Wikipedia, if Wikipedia were a map. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
+OpenStreetMap (OSM) is a world-wide, collaborative mapping project. You might think of it as Wikipedia, if Wikipedia were a map. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
 
 > You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full [legal code](https://opendatacommons.org/licenses/odbl/1.0/) explains your rights and responsibilities.
 
-This openness has led to a huge number of applications based on OSM, including large commercial applications which you've likely used before.
+This openness has led to a huge number of applications based on OSM, ranging from large commercial applications which you've likely used before, to thousands of small projects. 
 
 ## What's on the map?
 
@@ -24,12 +24,63 @@ OSM also doesn't include private or identifiable information. You can map a hous
 
 ## How is the data stored?
 
+* what is spatial data?
+
+### Spatial data
+
 OSM uses a _vector_ data model, not a _raster_ model. Rasters are pixels covering an area with a gradation of values. Vectors are discrete points and lines in space. In OSM, the fundamental types of spatial data are *nodes*, *ways*, and *relations*.
 
 * **Nodes**: Nodes or points have a single coordinate location. They may exist on their own or be members of the other types. You might map a post box as a node.
 * **Ways**: Ways consist of an ordered series of two or more points. A way that starts and ends at different nodes is a line while one that starts and ends at the same node is often (but not always)  considered a closed polygon. You would map a street as a line, and a cemetery as a polygon.
 * **Relations**: Relations are grouped collections of any of these data types, including, reflexively, relations. These are the most complex type. A tram route would be a relation. It has a route (the tracks it follows) and also some stops or platforms which could be represented as points or polygons. Relations can also used be used to break up very large features like the shore of Lake Erie, which might otherwise cause your computer to overheat. 
 
+### Attributes (tags)
+
+* free-form, not like tabular data
+* standards, but also anything goes
+* link to wiki
+* 
+
+
+## Strengths and Weaknesses of OSM for data science
+
+### Strengths
+* doesn't stop/change at administrative boundaries
+* queryability /  filtering
+* topological - routing
+* versioning
+* accepts your contributions
+
+### Weaknesses
+* incomplete / inexhaustive
+* strong, systematic biases in coverage - editor self-selection
+    * example of car/nav companies and paid editors
+* versioning
+* anyone can contribute (silliness, vandalism, beginner mistakes)
+
+## Contribute and access the data
+* OSM is a big online database
+* 
+### Contributing edits
+* ID editor
+* JOSM
+
+### Downloading data
+* XML and JSON
+    * matches referential, freeform structure
+* bounding box for all data (small - medium areas)
+* Overpass query (for filtered subsets of data)
+* mention planet download in passing
+* geofabric and other pre-sliced downloads + shapefiles
+
+## Some examples and applications
+
+### Use OSM in a basemap
+* download and visualize data in QGIS
+
+### Perhaps a very specific example for querying overpass?
+
+### Network/graph analysis in Python?
 
 
 
