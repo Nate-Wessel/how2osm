@@ -66,6 +66,8 @@ As you can see, OSM's data structure is enormously flexible. This is a huge stre
 
 ## Strengths and Weaknesses of OSM for data science
 
+OSM seems like the kind of thing you might either love or hate, but are unlikely to have ambivalent feelings about, at least if you're a geospatial nerd like me. Its great for some applications and for others might just drive you insane.
+
 ### Strengths
 
 #### Flexibility in describing thew world
@@ -86,16 +88,31 @@ OSM is intended to represent the current state of the world, but it also maintai
 
 #### It accepts your edits
 
-One of the biggest benefits of working with OSM data for a project may be a the simple fact that you can make edits. Inevitably, the data you need for your analysis will be incomplete. But you can use what's in OSM already as a starting point and add the bits that are missing, allowing you to complete your analysis while at the same time leaving the map better than you found it.
-
+One of the biggest benefits of working with OSM data for a project may be a the simple fact that you can make edits. Inevitably, the data you need for your analysis will be incomplete. But you can use what's in OSM already as a starting point and add the bits that are missing, allowing you to complete your analysis (without having to collect _all_ the data) while at the same time leaving the map better than you found it.
 
 ### Weaknesses
-* incomplete / inexhaustive
-* strong, systematic biases in coverage - editor self-selection
-    * example of car/nav companies and paid editors
-* versioning
-* anyone can contribute (silliness, vandalism, beginner mistakes)
-* inconsistent scale
+
+#### Inconsistency
+
+OSM data can be wildly inconsistent in quality, detail, and scale. In many parts of European cities, you'd be hard pressed to add any more to the map, where even individual street trees can appear with their genus, species, and approximate trunk diameter. On the flip side, much or rural Africa and Asia can look like it was hastily sketched on a napkin with even major features like roadways or rivers totally absent or misaligned by dozens of meters. Even within a city like Toronto the difference between downtown and the suburbs is pretty noticeable if you're paying attention.
+
+#### Strong selection biases in the data coverage
+
+Even the inconsistency of OSM data is inconsistent. That is to say, the inconsistency is very much not random and subject to the interests and biases of the contributors. One example that stands out to me is the recent rise of paid map editors (yes, those exist!) working for big international navigation and logistics companies. These companies use OSM as their primary data source and are very interested in doing quality control on features that could lead to errors for in-car navigation systems. This can mean that tagging errors in, say, major North American roadways are very quickly identified and fixed, while infrastructure for pedestrians just does not get the same scrutiny. A comparative analysis of those features would very much need to consider that.
+
+#### OSM is always changing
+
+Even setting aside the issues around consistency and bias, the nature of OSM as a community driven project means that it's always growing and evolving. This can be frustrating for data consumers. Let me give an example. I wanted to make a map of cycling infrastructure - bike lanes and the like - and had written code to look for three of the common tags for that:  
+
+* `cycleway=lane`
+* `cycleway:left=lane`
+* `cycleway:right=lane`
+
+These indicate respectively that a bike lane is on both sides of a street or just on the left or right side, depending which way the line is drawn. All was going well, until(!) at some point it started to become common to see the first tag supplanted by `cycleway:both=lane`, a tag that I didn't even know to look for until I was deep into trying to figure out why some major lanes were missing. The software I was using still doesn't support this tagging, but it's far too common in practice now to put that genie back in the bottle.
+
+#### It accepts your edits
+
+Just as it's a strength that the wise cartographer can add their wisdom to the map, so is it a detriment that any fool can add their foolishness too. Almost all edits to OSM are made in good faith, but it's the nature of a growing project that there will always be beginners making simple mistakes or failing to fully understand the norms of the community. If you're reading this, it's likely you'll make some mistakes too and perhaps you'll get a polite message from me or some other local mapper one day pointing out a better way of doing things. I've found OSM to be a welcoming and supportive community that welcomes and develops newcomers, but the truth is that the map at any given moment is likely full of small mistakes.
 
 ## Contribute and access the data
 * OSM is a big online database
