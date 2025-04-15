@@ -8,21 +8,23 @@ I mean only to tease and entice here. OpenStreetMap is a deep, _deep_ resource a
 
 ## What is OpenStreetMap?
 
-OpenStreetMap (OSM) is a world-wide, collaborative mapping project spanning a huge range of subjects. You might think of it as Wikipedia, if Wikipedia were a map. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
+OpenStreetMap (OSM) is a world-wide, collaborative mapping project spanning a huge range of subjects. You might think of it as Wikipedia, if Wikipedia were a map instead of a written body of text. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
 
 > You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full [legal code](https://opendatacommons.org/licenses/odbl/1.0/) explains your rights and responsibilities.
 
-This openness has led to a huge number of applications based on OSM, ranging from large companies offering maps or navigation services, to many thousands of smaller projects started by software developers, academics, and hobbyists.
+This openness has led to a huge number of applications based on OSM, ranging from large companies offering maps or navigation services, to many thousands of smaller projects started by software developers, activists, academics, and hobbyists.
 
 At the technical level, OSM is just a big spatial database run by the OpenStreetMap Foundation. It sits on a server somewhere and people access it over the web to make edits and download data. But OSM is also a community and a practice. Decisions about how it runs and what gets mapped are largely decentralized, and often local.
 
 ## What's on the map?
 
-The types of things included on the map range widely, from the glacial rivers of Greenland to the cafe around the corner from you. Train lines are on there, as are buildings, many millions of them, all the way down to your apartment or your mom's garden shed. However OpenStreetMap does not cover all subject matter. The basic rule is that data should be, in some sense, verifiable by a person on the ground in a real tangible way. This allows us to map sidewalks if they're there, but not the fact that a census tract contains people 37.8% of whom spoke French at home in the year 2021. It's [not a map of everything](https://wiki.openstreetmap.org/wiki/Scope). You could map that a restaurant exists and serves Tibetan food (that's on their menu, along with their hours and address), but it would be impossible to indicate that the neighbourhood contains many people from Tibet, because... I guess you'd have to ask them all? What would be meant by "many" or even "neighbourhood"? People will come to very different conclusions on that one. That's not verifiable. Whether there is or is not a bus stop here is much more verifiable. In a given context at least, we can probably all agree what counts as a bus stop. This verifiability requirement leads OSM to a sort of discreteness that not all mapping efforts share. Something does or does not exist, is this type of thing or that type of thing. OSM doesn't allow things to kind of exist, or exist to a degree.
+The types of things included on the map range widely, from the [glaciers](https://wiki.openstreetmap.org/wiki/Tag:natural%3Dglacier) of Greenland to the [cafe](https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcafe) around the corner from you. [Train routes](https://wiki.openstreetmap.org/wiki/Tag:route%3Dtrain) are on there, as are [buildings](https://wiki.openstreetmap.org/wiki/Buildings), hundreds of millions of them, all the way down to your [apartment](https://wiki.openstreetmap.org/wiki/Tag:building%3Dapartments) or your mom's garden [shed](https://wiki.openstreetmap.org/wiki/Tag:building%3Dshed). However OpenStreetMap does not cover all subject matter. The basic rule is that data should be, in some sense, [verifiable](https://wiki.openstreetmap.org/wiki/Verifiability) by a person on the ground in a real tangible way. This allows us to map sidewalks if they're there, but not the fact that a census tract contains people 37.8% of whom spoke French at home in the year 2021. It's [not a map of everything](https://wiki.openstreetmap.org/wiki/Scope).
 
-One important exception to the verifiability rule is political boundaries, which often have no tangible signifier in the real world. These are included for completeness, and because they rarely change, but should generally not be considered as authoritative.
+To give another example, you could map that a [restaurant](https://wiki.openstreetmap.org/wiki/Tag:amenity%3Drestaurant) exists and serves [Tibetan food](https://wiki.openstreetmap.org/wiki/Key:cuisine) (that's probably spelled out on their menu, along with their hours and address), but it would be impossible to indicate that the neighbourhood contains many people from Tibet, because... I guess you'd have to ask them all? What would be meant by "many" or even "neighbourhood"? People will come to very different conclusions on that one. That's not independently _verifiable_.
 
-OSM also doesn't include private or identifiable information. You can map a house, but not say who lives there, and you also won't find any property lines in OSM, unless they happen to be marked by some physical boundary.
+Whether there is or is not a [bus stop](https://wiki.openstreetmap.org/wiki/Tag:highway%3Dbus_stop) here is much more verifiable. In a given context at least, we can probably all agree what counts as a bus stop. This verifiability requirement leads OSM to a sort of discreteness that not all mapping efforts share. Something does or does not exist, is this type of thing or that type of thing. OSM doesn't allow things to kind of exist or exist to a degree. It doesn't allow us to have competing versions of reality.
+
+One important exception to the verifiability rule is [political](https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dpolitical) or [administrative boundaries](https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative), which often have no tangible existence in the real world. These are included for completeness, and because they rarely change, but should generally not be considered as authoritative. OSM also doesn't include private or identifiable information. You can map a house, but not say who lives there, and you also won't find any property lines in OSM, unless they just so happen to be marked by some physical boundary like a [fence](https://wiki.openstreetmap.org/wiki/Tag:barrier%3Dfence).
 
 ## How is the data structured?
 
@@ -32,9 +34,9 @@ There are two aspects to pretty much any spatial dataset: the geometries and the
 
 OSM uses a _vector_ data model, not a _raster_ model. Rasters are pixels covering an area with a gradation of values. Vectors are discrete points and lines in space. In OSM, the fundamental types of spatial data are *nodes*, *ways*, and *relations*.
 
-* **Nodes**: Nodes or points have a single coordinate location. They may exist on their own or be members of the other types. You might map a post box as a node.
-* **Ways**: Ways consist of an ordered series of two or more points. A way that starts and ends at different nodes is a line while one that starts and ends at the same node is often (but not always)  considered a closed polygon. You would probably map a street as a line, and a cemetery as a polygon.
-* **Relations**: Relations are grouped collections of any of these data types, including, reflexively, relations. These are the most complex type. A tram route for example would be a relation. It has a route (the tracks it follows) and also some stops or platforms which could be represented as points or polygons along the route. Relations can also used be used to break up very large features like the shores of Lake Erie, which might otherwise cause your computer to overheat. Or they can be used to describe multipolygon or multiline geometry types.
+* **Nodes**: Nodes or points have a single coordinate location. They may exist on their own or be members of the other types. You might map a [post box](https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpost_box) as a node.
+* **Ways**: Ways consist of an ordered series of two or more points. A way that starts and ends at different nodes is a line while one that starts and ends at the same node is often (but not always)  considered a closed polygon. You would probably map a [street](https://wiki.openstreetmap.org/wiki/Key:highway) as a line, and a [cemetery](https://wiki.openstreetmap.org/wiki/Tag:landuse%3Dcemetery) as a polygon.
+* **Relations**: Relations are grouped collections of any of these data types, including, reflexively, relations. These are the most complex type. A tram route for example would be a relation. It has a route (the tracks it follows) and also some stops or platforms which could be represented as points or polygons along the route. Relations can also used be used to break up very large features like the [Great Lakes](https://wiki.openstreetmap.org/wiki/Great_Lakes), which might otherwise cause your computer to overheat. Or they can be used to describe multipolygon or multiline geometry types.
 
 ### Attributes (tags)
 
@@ -78,6 +80,8 @@ As described in the previous section, OSM has great flexibility for describing t
 
 For much of my life, most of the world's geospatial data was collected and administered by government agencies. These agencies did great work, right up to the edge of their jurisdiction and then beyond that was a vast, blank _terra incognita_. OpenStreetMap may include boundaries, but they sit inside of a global dataset and aren't fundamental to how the map gets made. This means you can use OSM to analyse X or Y in North America, or within 500km of some point, without to a large degree worrying about administrative differences in data collection.
 
+![A cycling route crossing international borders](./images/cross-border-route.png)
+
 #### Implicit topology
 
 The topological (and cross-border) nature of OSM data makes it particularly well suited to transportation applications like finding walking or cycling directions from A to B. Indeed, this is the aspect of OSM to date that's been the most monetized, but it's also available to  you for free thanks to a wide range of routing applications. 
@@ -95,6 +99,8 @@ One of the biggest benefits of working with OSM data for a project may be a the 
 #### Inconsistency
 
 OSM data can be wildly inconsistent in quality, detail, and scale. In many parts of European cities, you'd be hard pressed to add any more to the map, where even individual street trees can appear with their genus, species, and approximate trunk diameter. On the flip side, much or rural Africa and Asia can look like it was hastily sketched on a napkin with even major features like roadways or rivers totally absent or misaligned by dozens of meters. Even within a city like Toronto the difference between downtown and the suburbs is pretty noticeable if you're paying attention.
+
+![Data in northern Ontario missing large, defining features of the landscape](./images/northern-ontario.png)
 
 #### Strong selection biases in the data coverage
 
@@ -114,25 +120,29 @@ These indicate respectively that a bike lane is on both sides of a street or jus
 
 Just as it's a strength that the wise cartographer can add their wisdom to the map, so is it a detriment that any fool can add their foolishness too. Almost all edits to OSM are made in good faith, but it's the nature of a growing project that there will always be beginners making simple mistakes or failing to fully understand the norms of the community. If you're reading this, it's likely you'll make some mistakes too and perhaps you'll get a polite message from me or some other local mapper one day pointing out a better way of doing things. I've found OSM to be a welcoming and supportive community that welcomes and develops newcomers, but the truth is that the map at any given moment is likely full of small mistakes.
 
+![A user has misused the `name=*` tag, filling it with a description and some kind of identifier. No one walking past this building would recognize that as it's name.](./images/misuse-of-name-tag.png)
+
 ## Contribute and access the data
 * OSM is a big online database
-* 
+
 ### Contributing edits
 * ID editor
 * JOSM
 
 ### Downloading data
-* XML and JSON
+* XML and JSON (also PBF)
     * matches referential, freeform structure
 * bounding box for all data (small - medium areas)
 * Overpass query (for filtered subsets of data)
 * mention planet download in passing
 * geofabric and other pre-sliced downloads + shapefiles
+    * tabular data means not everything represented
 
 ## Some examples and applications
 
+
 ### Use OSM in a basemap
-* use tiles - free and easy context
+* use pre-rendered tiles - free and easy context
 * or download and visualize data in QGIS - more custom
 
 ### Perhaps a very specific example for querying overpass?
