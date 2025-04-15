@@ -40,7 +40,7 @@ OSM uses a _vector_ data model, not a _raster_ model. Rasters are pixels coverin
 
 ### Attributes (tags)
 
-The way OSM handles attributes, "tags" in OSM parlance, is different from many other datasets you may be familiar with, especially those from government sources. Tags are associated with nodes, ways, and/or relations, though many nodes and ways may also have no tags at all if they belong to one of the other types (ways or relations) which has its own tags to describe the whole feature.
+The way OSM handles attributes, "[tags](https://wiki.openstreetmap.org/wiki/Tags)" in OSM parlance, is different from many other datasets you may be familiar with, especially those from government sources. Tags are associated with nodes, ways, and/or relations, though many nodes and ways may also have no tags at all if they belong to one of the other types (ways or relations) which has its own tags to describe the whole feature.
 
 Tags take the form of `key=value` pairs, such as `building=residential` or `amenity=restaurant`. Usually, like these examples, their meaning is intuitively obvious, at least to an anglophone. In other cases, a more complex pattern has become the norm. For example, an address could be indicated with a set of tags like:
 
@@ -52,39 +52,39 @@ Tags take the form of `key=value` pairs, such as `building=residential` or `amen
 
 This approach breaks the address down into its parts to make the result more machine readable.
 
-Tags, or at least their _keys_ are always in English, usually British English since that's where OSM originated. For names however (the tag for this is `name=*`), the practice is to always use the local language, for example `name=臺灣`, while the English name can be given like `name:en=Taiwan`.
+Tags, or at least their _keys_ are always in English, usually British English since that's where OSM originated. For names however (the tag for this is [`name=*`](https://wiki.openstreetmap.org/wiki/Key:name)), the practice is to always use the local language, for example `name=臺灣`, while the English name can be given like `name:en=Taiwan`.
 
-At this point, you may be noticing that I'm describing tagging with words like "could", "may", "the practice is"... This is because there's no single authority on what tags are valid or how they need to be constructed except for the technical constraint that both the keys and values are text strings. Instead, the OSM community has established and documented a wide range of norms for tagging common, and not so common, features. The best way to find these is by searching the [OSM wiki](https://wiki.openstreetmap.org/), or perhaps by looking at what's on the map in an area you're familiar with. Tags that stray outside the norms are technically allowed but in general are of little value. Applications that ingest OSM data won't support them and other mappers likely won't know what to do with them either. Because of this, it can be important to know that a restaurant is `amenity=restaurant`, while a laundromat is `shop=laundry`. Why is it a shop and not also an amenity? Well, for the same reason that you have a tailbone: because it started out that way and now it's pretty baked in and not causing any harm. There are a lot of little idiosyncrasies like that, but they're not too hard to remember after a while.
+At this point, you may be noticing that I'm describing tagging with words like "could", "may", "the practice is"... This is because there's no single authority on what tags are valid or how they need to be constructed except for the technical constraint that both the keys and values are text strings. Instead, the OSM community has established and documented a wide range of norms for tagging common, and not so common, features. The best way to find these is by searching the [OSM wiki](https://wiki.openstreetmap.org/), or perhaps by looking at what's on the map in an area you're familiar with. Tags that stray outside the norms are technically allowed but in general are of little value. Applications that ingest OSM data won't support them and other mappers likely won't know what to do with them either. Because of this, it can be important to know that a restaurant is `amenity=restaurant`, while a laundromat is `shop=laundry`. Why is it a shop and not also an amenity? Well, for the same reason that you have a tailbone: because it started out that way and now it's pretty baked in and it's not causing any harm. There are a lot of little idiosyncrasies like that, but they're not too hard to remember after a while.
 
-Another important difference from many spatial datasets is that there's no real concept of completeness for tagging. What tags would exhaustively describe a restaurant for example? OSM is always a work in progress. Often the first person to add something to the map does something very simple: saying, "there's a restaurant here" (`amenity=restaurant`) and then a month later someone comes by and adds the tag `cuisine=tibetan`, telling us that it serves Tibetan food. Later on, someone may add the name and a web address for the restaurant, a phone number, a list of payment methods accepted, whether they serve vegetarian dishes, how accessible the place is, the hours... any combination of any of these tags may be found together.
+Another important difference from many spatial datasets is that there's no real concept of completeness for tagging. What tags would exhaustively describe a restaurant for example? OSM is always a work in progress. Often the first person to add something to the map does something very simple: saying, "there's a restaurant here" (`amenity=restaurant`) and then a month later someone comes by and adds the tag `cuisine=tibetan`, telling us that it serves Tibetan food. Later on, someone may add the name and a web address for the restaurant, a phone number, a list of payment methods accepted, whether they serve vegetarian dishes, how accessible the place is, the hours... any combination of any of these tags may be found together. Just when you think you've completed a feature, someone will come along and point out that the building has a grey, slate, Mansard style roof ([`roof:colour=gray`](https://wiki.openstreetmap.org/wiki/Key:roof:colour), [`roof:material=slate`](https://wiki.openstreetmap.org/wiki/Key:roof:material), [`roof:shape=mansard`](https://wiki.openstreetmap.org/wiki/Tag:roof:shape%3Dmansard)). It's truly never done.
 
 ### Spatial Data + Tags
 
 Tags can be applied to nodes, ways, or relations, and there's not always a prescribed spatial type needed to define a given feature. To take up the restaurant example again, in many dense areas, restaurants are mostly mapped as points, especially if they share a building with other uses. But if a restaurant has its own building, then the `amenity=restaurant` tag might go on the polygon representing the building. If that building happened to have an interior courtyard, it would need to be mapped as a relation (because the polygon's inner ring would make it a multi-geometry) and the restaurant tags would go on the relation.
 
-As I indicated before, tagging is also optional. Most nodes in the database have no tags at all and simply serve to help define the shapes of the lines or polygons that reference them. 
+As I indicated before, tagging is also somewhat optional. Most nodes in the database have no tags at all and simply serve to help define the shapes of the tagged lines or polygons that reference them.
 
-As you can see, OSM's data structure is enormously flexible. This is a huge strength, given the enormous variety of real things out there in the world that we want to describe, but it can in equal measure be a liability for those who want to use OSM to answer "simple" questions like "How many restaurants are there in Toronto?"
+As you can see, OSM's data structure is enormously flexible. This is a huge strength, given the enormous variety of real things out there in the world that we want to describe, but it can in equal measure be a liability for those who want to use OSM to answer "simple" questions like "How many Korean restaurants are there in Toronto?"
 
-## Strengths and Weaknesses of OSM for data science
+## Strengths and Weaknesses of OSM for mapping and data science
 
 OSM seems like the kind of thing you might either love or hate, but are unlikely to have ambivalent feelings about, at least if you're a geospatial nerd like me. Its great for some applications and for others might just drive you insane.
 
 ### Strengths
 
-#### Flexibility in describing thew world
+#### Flexibility in describing the world
 
 As described in the previous section, OSM has great flexibility for describing things in the real world. The structure of tagging means we can add information as it becomes available, add detail to entities that are already in the database, and also describe things at various levels of detail, both spatially and in terms of attributes.
 
 #### OSM spans boundaries
 
-For much of my life, most of the world's geospatial data was collected and administered by government agencies. These agencies did great work, right up to the edge of their jurisdiction and then beyond that was a vast, blank _terra incognita_. OpenStreetMap may include boundaries, but they sit inside of a global dataset and aren't fundamental to how the map gets made. This means you can use OSM to analyse X or Y in North America, or within 500km of some point, without to a large degree worrying about administrative differences in data collection.
+For much of my life, most of the world's geospatial data was collected and administered by government agencies. These agencies did great work, right up to the edge of their jurisdiction and then beyond that was a vast, blank _terra incognita_. OpenStreetMap may include boundaries, but they sit inside of a global dataset and aren't fundamental to how the map gets made. This means you can use OSM to analyse X or Y in North America, or within 500km of some point, without worrying about administrative differences in data collection.
 
 ![A cycling route crossing international borders](./images/cross-border-route.png)
 
 #### Implicit topology
 
-The topological (and cross-border) nature of OSM data makes it particularly well suited to transportation applications like finding walking or cycling directions from A to B. Indeed, this is the aspect of OSM to date that's been the most monetized, but it's also available to  you for free thanks to a wide range of routing applications. 
+The topological (and cross-border) nature of OSM data makes it particularly well suited to transportation applications like finding walking or cycling directions from A to B. Indeed, this is the aspect of OSM to date that's been the most monetized, but it's also available to  you for free thanks to a wide range of open-source routing applications.
 
 #### Version control
 
@@ -92,19 +92,19 @@ OSM is intended to represent the current state of the world, but it also maintai
 
 #### It accepts your edits
 
-One of the biggest benefits of working with OSM data for a project may be a the simple fact that you can make edits. Inevitably, the data you need for your analysis will be incomplete. But you can use what's in OSM already as a starting point and add the bits that are missing, allowing you to complete your analysis (without having to collect _all_ the data) while at the same time leaving the map better than you found it.
+One of the biggest benefits of working with OSM data for a project may be a the simple fact that you can make edits. Inevitably, the data you need for your analysis will be incomplete. But you can use what's in OSM already as a starting point and add the bits that are missing, allowing you to complete your analysis (without having to collect _all_ the data) while at the same time leaving the map better than you found it. I've done this myself many times. When working with typical spatial datasets, where you download everything from some organization, it can be very hard to make edits _and then also_ synchronize those edits with updates from the authoritative source.
 
 ### Weaknesses
 
 #### Inconsistency
 
-OSM data can be wildly inconsistent in quality, detail, and scale. In many parts of European cities, you'd be hard pressed to add any more to the map, where even individual street trees can appear with their genus, species, and approximate trunk diameter. On the flip side, much or rural Africa and Asia can look like it was hastily sketched on a napkin with even major features like roadways or rivers totally absent or misaligned by dozens of meters. Even within a city like Toronto the difference between downtown and the suburbs is pretty noticeable if you're paying attention.
+OSM data can be wildly inconsistent in quality, detail, and scale. In many parts of central Europe, you'd be hard pressed to add any more to the map, where even individual street trees can appear with their [genus](https://wiki.openstreetmap.org/wiki/Key:genus), [species](https://wiki.openstreetmap.org/wiki/Key:species), and [trunk circumference](https://wiki.openstreetmap.org/wiki/Key:circumference). On the flip side, much or rural Africa and South America can look like it was hastily sketched on a napkin with even major features like roadways or rivers totally absent or misaligned by dozens of meters. Even within a city like Toronto the difference in quality and completeness between downtown and the suburbs is pretty noticeable if you're paying attention.
 
 ![Data in northern Ontario missing large, defining features of the landscape](./images/northern-ontario.png)
 
 #### Strong selection biases in the data coverage
 
-Even the inconsistency of OSM data is inconsistent. That is to say, the inconsistency is very much not random and subject to the interests and biases of the contributors. One example that stands out to me is the recent rise of paid map editors (yes, those exist!) working for big international navigation and logistics companies. These companies use OSM as their primary data source and are very interested in doing quality control on features that could lead to errors for in-car navigation systems. This can mean that tagging errors in, say, major North American roadways are very quickly identified and fixed, while infrastructure for pedestrians just does not get the same scrutiny. A comparative analysis of those features would very much need to consider that.
+Even the inconsistency of OSM data is inconsistent. That is to say, the inconsistency is very much not random and subject to the interests and biases of the contributors. One example that stands out to me is the recent rise of paid map editors (yes, by the way, those exist!) working for big international navigation and logistics companies. These companies use OSM as their primary data source and are very interested in doing quality control on features that could lead to errors for in-vehicle navigation systems. This can mean that tagging errors in, say, major North American roadways are very quickly identified and fixed, while infrastructure for pedestrians just does not get the same scrutiny. A comparative analysis of those features would very much need to consider that one of those features has a lot of money behind it.
 
 #### OSM is always changing
 
@@ -114,11 +114,11 @@ Even setting aside the issues around consistency and bias, the nature of OSM as 
 * `cycleway:left=lane`
 * `cycleway:right=lane`
 
-These indicate respectively that a bike lane is on both sides of a street or just on the left or right side, depending which way the line is drawn. All was going well, until(!) at some point it started to become common to see the first tag supplanted by `cycleway:both=lane`, a tag that I didn't even know to look for until I was deep into trying to figure out why some major lanes were missing. The software I was using still doesn't support this tagging, but it's far too common in practice now to put that genie back in the bottle.
+These indicate respectively that a bike lane is on both sides of a street or just on the left or right side, depending which way the line is drawn. All was going well, until(!) at some point it started to become common to see the first tag supplanted by `cycleway:both=lane`, a tag that I didn't even know to look for until I was deep into trying to figure out why some major lanes were missing from my map. The software I was using still doesn't actually support this tagging out of the box, and it's far too common in practice now to try to go back to the older tagging style.
 
 #### It accepts your edits
 
-Just as it's a strength that the wise cartographer can add their wisdom to the map, so is it a detriment that any fool can add their foolishness too. Almost all edits to OSM are made in good faith, but it's the nature of a growing project that there will always be beginners making simple mistakes or failing to fully understand the norms of the community. If you're reading this, it's likely you'll make some mistakes too and perhaps you'll get a polite message from me or some other local mapper one day pointing out a better way of doing things. I've found OSM to be a welcoming and supportive community that welcomes and develops newcomers, but the truth is that the map at any given moment is likely full of small mistakes.
+Just as it's a strength that the wise cartographer can add their wisdom to the map, so is it a detriment that any fool can add their foolishness too. Almost all edits to OSM are made in good faith but it's the nature of a growing project that there will always be beginners making simple mistakes or failing to fully understand the norms of the community. If you're reading this, it's likely you'll make some mistakes too and perhaps you'll get a polite message from me or some other local mapper one day pointing out a better way of doing things. I've found OSM to be a supportive community that happily welcomes and develops newcomers, but the truth is that the map at any given moment is likely full of small mistakes that haven't been fixed yet.
 
 ![A user has misused the `name=*` tag, filling it with a description and some kind of identifier. No one walking past this building would recognize that as it's name.](./images/misuse-of-name-tag.png)
 
