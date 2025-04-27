@@ -131,36 +131,48 @@ Just as it's a strength that the wise cartographer can add their wisdom to the m
 
 ### Downloading data
 
-OpenStreetMap itself, that is, [openstreetmap.org](https://openstreetmap.org) offers fairly limited ways of downloading data; you can download either all the data within a fairly small bounding box as an XML file, or you can download a compressed version (`.pbf`) of the entire planet. Unless you're a professional database administrator with some time to kill, I wouldn't recommend the later option. But let's talk briefly about that XML file format. It looks something like this:
+OpenStreetMap itself, that is, [openstreetmap.org](https://openstreetmap.org) offers fairly limited ways of downloading data; you can download either all the data within a fairly small bounding box as an XML file, or you can download a compressed version (`.pbf`) of the entire planet. Unless you're a professional database administrator with some time to kill, I wouldn't recommend the later option. But let's talk briefly about that XML file format. For a very simple example, it looks something like this:
 
 ```xml
-TODO: simple example
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.0.1 (3529599 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+    <bounds minlat="43.8697990" minlon="-79.7034210" maxlat="43.8708900" maxlon="-79.7012510"/>
+    <node id="11278892239" visible="true" version="1" changeset="142909966" timestamp="2023-10-21T06:56:10Z" user="nitemoon" uid="15815701" lat="43.8707980" lon="-79.7028380"/>
+    <node id="11278892240" visible="true" version="1" changeset="142909966" timestamp="2023-10-21T06:56:10Z" user="nitemoon" uid="15815701" lat="43.8707710" lon="-79.7029400"/>
+    <node id="11278892241" visible="true" version="1" changeset="142909966" timestamp="2023-10-21T06:56:10Z" user="nitemoon" uid="15815701" lat="43.8706280" lon="-79.7028670"/>
+    <node id="11278892242" visible="true" version="1" changeset="142909966" timestamp="2023-10-21T06:56:10Z" user="nitemoon" uid="15815701" lat="43.8706550" lon="-79.7027640"/>
+    <way id="1217260361" visible="true" version="1" changeset="142909966" timestamp="2023-10-21T06:56:10Z" user="nitemoon" uid="15815701">
+        <nd ref="11278892239"/>
+        <nd ref="11278892240"/>
+        <nd ref="11278892241"/>
+        <nd ref="11278892242"/>
+        <nd ref="11278892239"/>
+        <tag k="building" v="yes"/>
+        <tag k="source" v="microsoft/BuildingFootprints"/>
+    </way>
+</osm>
 ```
 
-As you can see, this file directly mirrors the structure of the data described above. There are nodes, ways, and relations which reference each other by numeric unique identifiers. Take a close look and you should be able to tell from the tags that we're looking at...
-
-TODO: describe whatever simple example I came up with
+Look closely and you can see that the file structure directly mirrors the structure of the OSM database described above. There are four nodes, each with a numeric unique ID and a set of coordinates. There's also a single way which contains an ordered list of references to each of those four nodes, and some tags describing what the way is. Take a close look and you should be able to tell from the XML that we're looking at a single rectangular building mapped as a closed polygon. Note that while there are four nodes, there are actually five references to them, with the first and last reference being to the same node ID. This is what tells us this is a closed polygon and not an open line. There's also a lot of extra metadata in this file which tells us who created these elements and when. The nodes themselves in this case don't have any tags.
 
 But as I said, what OSM itself can give you is limited. OSM wants to conserve resources on their servers to ensure that contributors get the freshest data at the scale they need it to make edits.
 
-Fortunately, OSM as a community has a variety of resources to fill the gaps.
-These kind Internet strangers have downloaded that whole planet file and set up their copies to stay synchronized with the main database. They then offer additional ways of downloading larger chunks of data from their cloned databases, though often with some lag (from minutes to days) from the main database.
+Fortunately, OSM as a community has a variety of resources to fill the gaps for data consumers. These kind Internet strangers have downloaded that whole planet file and set up their copies to stay synchronized with the main database. They then offer additional ways of downloading larger chunks of data from their cloned databases, though often with some lag, ranging from minutes to days, from the main database.
 
 #### The Overpass API
 
 Perhaps the most versatile of these community sources is the Overpass API. Overpass allows you to query the database in a great variety of ways using its own OSM-specific query language. To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it.
 
-Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on openstreetmap.org, which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "download" tab, and select download from Overpass.
+Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on [openstreetmap.org](https://openstreetmap.org), which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "export" option, and select "Overpass API" in the sidebar to download. If you go too big (e.g. all of Europe), the API will timeout and throw an error. 
 
-Now you may be asking:
+Did you download a file? Good! Now you may be asking:
 > What on Earth will I do with this 600MB XML file? I tried to open it with a text editor and my computer crashed!
 
-Indeed. It's a big file, and you'll probably want to use some kind of program to parse the file in some way before working with it. When making a map, I typically use a program called `osm2pgsql` to import the data into a PostgreSQL database on my computer. Many other tools exist though. I'll just point to a few and let you explore their documentation on your own.
+Indeed. It's a big file, and you'll probably want to use some kind of program to parse the file in some way before working with it. When making a map, I typically use a program called [`osm2pgsql`](https://osm2pgsql.org/) to import the XML data into a PostgreSQL database on my computer. Many other tools exist though. I'll just point to a few and let you explore their documentation on your own.
 
-* `osmium` ...
-* `tippecanoe` can parse the data into vector map tiles which you could serve to a web application
-* `ogr2ogr` ...
-* Open Source Routing Machine (ORSM) will parse the street network and set up an efficient and customizable routing engine
+* [`osmium`](https://osmcode.org/osmium-tool/): extract and filter data, or convert between OSM formats like PBF, XML, and JSON
+* [`ogr2ogr`](https://wiki.openstreetmap.org/wiki/OGR): convert between OSM and many other spatal formats like GeoJSON or shapefile
+* [Open Source Routing Machine (ORSM)](https://project-osrm.org/): parse the street network and set up an efficient and customizable routing engine
 
 well
 
