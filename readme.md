@@ -148,9 +148,27 @@ These kind Internet strangers have downloaded that whole planet file and set up 
 
 #### The Overpass API
 
-Perhaps the most versatile of these community sources is the Overpass API.
+Perhaps the most versatile of these community sources is the Overpass API. Overpass allows you to query the database in a great variety of ways using its own OSM-specific query language. To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it.
 
-* Overpass query (for filtered subsets of data)
+Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on openstreetmap.org, which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "download" tab, and select download from Overpass.
+
+Now you may be asking:
+> What on Earth will I do with this 600MB XML file? I tried to open it with a text editor and my computer crashed!
+
+Indeed. It's a big file, and you'll probably want to use some kind of program to parse the file in some way before working with it. When making a map, I typically use a program called `osm2pgsql` to import the data into a PostgreSQL database on my computer. Many other tools exist though. I'll just point to a few and let you explore their documentation on your own.
+
+* `osmium` ...
+* `tippecanoe` can parse the data into vector map tiles which you could serve to a web application
+* `ogr2ogr` ...
+* Open Source Routing Machine (ORSM) will parse the street network and set up an efficient and customizable routing engine
+
+well
+
+* look for all the yarn shops in the world which are mapped as nodes
+* download everything within a rectangular bounding box
+* download everything in the city of Canton, Ohio
+* download the residential streets that intersect this particular traffic signal
+* count the restaurants in Toronto
 
 #### GeoFabrik
 
