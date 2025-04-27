@@ -130,13 +130,35 @@ Just as it's a strength that the wise cartographer can add their wisdom to the m
 * JOSM
 
 ### Downloading data
-* XML and JSON (also PBF)
-    * matches referential, freeform structure
-* bounding box for all data (small - medium areas)
+
+OpenStreetMap itself, that is, [openstreetmap.org](https://openstreetmap.org) offers fairly limited ways of downloading data; you can download either all the data within a fairly small bounding box as an XML file, or you can download a compressed version (`.pbf`) of the entire planet. Unless you're a professional database administrator with some time to kill, I wouldn't recommend the later option. But let's talk briefly about that XML file format. It looks something like this:
+
+```xml
+TODO: simple example
+```
+
+As you can see, this file directly mirrors the structure of the data described above. There are nodes, ways, and relations which reference each other by numeric unique identifiers. Take a close look and you should be able to tell from the tags that we're looking at...
+
+TODO: describe whatever simple example I came up with
+
+But as I said, what OSM itself can give you is limited. OSM wants to conserve resources on their servers to ensure that contributors get the freshest data at the scale they need it to make edits.
+
+Fortunately, OSM as a community has a variety of resources to fill the gaps.
+These kind Internet strangers have downloaded that whole planet file and set up their copies to stay synchronized with the main database. They then offer additional ways of downloading larger chunks of data from their cloned databases, though often with some lag (from minutes to days) from the main database.
+
+#### The Overpass API
+
+Perhaps the most versatile of these community sources is the Overpass API.
+
 * Overpass query (for filtered subsets of data)
-* mention planet download in passing
-* geofabric and other pre-sliced downloads + shapefiles
-    * tabular data means not everything represented
+
+#### GeoFabrik
+
+Another handy resource offers downloads in a format that might be more familiar to the typical GISer. GeoFabrik is a ??? which offers downloads in shapefile format which package data with most of the commonly used tags into chunks split up by major administrative boundaries. For example you could download data for Canada or Ontario.
+
+Shapefiles, like Ginko trees and horseshoe crabs, are surprisingly ancient things somehow still living among us. They're a tabular file format (that is, data in the form of a _table_), where each entity (node, way, relation) is a row and each tag is a column. Because there are many, many tags, and most entities have only a few of them, most entries in the table are null and not all tags can be accommodated. This is why the Geofabrik shapefiles only include the most common tags. Shapefiles also must keep different geometry types separate, meaning there will be separate files for point, line, and polygon geometries.
+
+These downloads can be a good entry point into OSM data if you're already comfortable working with shapefiles but the file format limits what you can do with the data. If you want to make a quick map without worrying too much about the nuances of the data structure, this is probably what you want. 
 
 ## Some examples and applications
 
