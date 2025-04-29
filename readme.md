@@ -184,7 +184,7 @@ Go to the [Overpass API](https://overpass-turbo.eu/) and pop that query text in 
 
 Now click the "export" tab to download the data in a variety of formats. If you wanted to quickly make a map with this in a standard desktop GIS, GeoJSON would be a good, straightforward choice. You could just drag this straight into QGIS and begin styling the layers.
 
-Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on [openstreetmap.org](https://openstreetmap.org), which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "export" option, and select "Overpass API" in the sidebar to download. If you go too big (e.g. all of Europe), the API will timeout and throw an error. 
+Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on [openstreetmap.org](https://openstreetmap.org), which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "export" option, and select "Overpass API" in the sidebar to download. If you go too big (e.g. country level), the API will timeout and throw an error.
 
 Did you download a file? Good! Now you may be asking:
 > What on Earth will I do with this 600MB XML file? I tried to open it with a text editor and my computer crashed!
@@ -194,14 +194,6 @@ Indeed. It's a big file, and you'll probably want to use some kind of program to
 * [`osmium`](https://osmcode.org/osmium-tool/): extract and filter data, or convert between OSM formats like PBF, XML, and JSON
 * [`ogr2ogr`](https://wiki.openstreetmap.org/wiki/OGR): convert between OSM and many other spatal formats like GeoJSON or shapefile
 * [Open Source Routing Machine (ORSM)](https://project-osrm.org/): parse the street network and set up an efficient and customizable routing engine
-
-well
-
-* look for all the yarn shops in the world which are mapped as nodes
-* download everything within a rectangular bounding box
-* download everything in the city of Canton, Ohio
-* download the residential streets that intersect this particular traffic signal
-* count the restaurants in Toronto
 
 #### GeoFabrik
 
