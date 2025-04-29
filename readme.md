@@ -114,13 +114,15 @@ Even setting aside the issues around consistency and bias, the nature of OSM as 
 * `cycleway:left=lane`
 * `cycleway:right=lane`
 
-These indicate respectively that a bike lane is on both sides of a street or just on the left or right side, depending which way the line is drawn. All was going well, until(!) at some point it started to become common to see the first tag supplanted by `cycleway:both=lane`, a tag that I didn't even know to look for until I was deep into trying to figure out why some major lanes were missing from my map. The software I was using still doesn't actually support this tagging out of the box, and it's far too common in practice now to try to go back to the older tagging style.
+These indicate respectively that a bike lane is on both sides of a street or just on the left or right side, depending which way the line is drawn. All was going well, until(!) at some point it started to become common to see the first tag supplanted by `cycleway:both=lane`, a tag that I didn't even know to look for until I was deep into trying to figure out why some major lanes were missing from my map. The software I was using still doesn't actually support this tagging out of the box, and it's far too common in practice now to try to go back to the older tagging style. To keep my project up to date I must find ways to adapt my code.
 
 #### It accepts your edits
 
 Just as it's a strength that the wise cartographer can add their wisdom to the map, so is it a detriment that any fool can add their foolishness too. Almost all edits to OSM are made in good faith but it's the nature of a growing project that there will always be beginners making simple mistakes or failing to fully understand the norms of the community. If you're reading this, it's likely you'll make some mistakes too and perhaps you'll get a polite message from me or some other local mapper one day pointing out a better way of doing things. I've found OSM to be a supportive community that happily welcomes and develops newcomers, but the truth is that the map at any given moment is likely full of small mistakes that haven't been fixed yet.
 
 ![A user has misused the `name=*` tag, filling it with a description and some kind of identifier. No one walking past this building would recognize that as it's name.](./images/misuse-of-name-tag.png)
+
+One example that comes to mind is the border between India and China. It's a very large and complex boundary that neither country actually agrees on. OSM has a nuanced way of tagging [disputed political boundaries](https://wiki.openstreetmap.org/wiki/Disputed_territories), but I found that in practice the boundary relations for each country would often break down (i.e. fail to be a closed polygon) because novice editors didn't understand this complexity. I shouldn't have to have to fix China and re-download the data every fifth time I make a map of the region.
 
 ## Contribute and access the data
 * OSM is a big online database
@@ -153,7 +155,7 @@ OpenStreetMap itself, that is, [openstreetmap.org](https://openstreetmap.org) of
 </osm>
 ```
 
-Look closely and you can see that the file structure directly mirrors the structure of the OSM database described above. There are four nodes, each with a numeric unique ID and a set of coordinates. There's also a single way which contains an ordered list of references to each of those four nodes, and some tags describing what the way is. Take a close look and you should be able to tell from the XML that we're looking at a single rectangular building mapped as a closed polygon. Note that while there are four nodes, there are actually five references to them, with the first and last reference being to the same node ID. This is what tells us this is a closed polygon and not an open line. There's also a lot of extra metadata in this file which tells us who created these elements and when. The nodes themselves in this case don't have any tags.
+Look closely and you can see that the file structure directly mirrors the structure of the OSM database described above. There are four nodes, each with a unique numeric ID and a set of coordinates. There's also a single way which contains an ordered list of references to each of those four nodes, and some tags describing what the way is. Take a close look and you should be able to tell from the XML that we're looking at a single rectangular building mapped as a closed polygon. Note that while there are four nodes, there are actually five references to them, with the first and last reference being to the same node ID. This is what tells us this is a closed polygon and not an open line. There's also a lot of extra metadata in this file which tells us who created these elements and when. The nodes themselves in this case don't have any tags.
 
 But as I said, what OSM itself can give you is limited. OSM wants to conserve resources on their servers to ensure that contributors get the freshest data at the scale they need it to make edits.
 
@@ -195,13 +197,13 @@ Indeed. It's a big file, and you'll probably want to use some kind of program to
 * [`ogr2ogr`](https://wiki.openstreetmap.org/wiki/OGR): convert between OSM and many other spatal formats like GeoJSON or shapefile
 * [Open Source Routing Machine (ORSM)](https://project-osrm.org/): parse the street network and set up an efficient and customizable routing engine
 
-#### GeoFabrik
+#### GeoFabrik Regional downloads
 
-Another handy resource offers downloads in a format that might be more familiar to the typical GISer. GeoFabrik is a ??? which offers downloads in shapefile format which package data with most of the commonly used tags into chunks split up by major administrative boundaries. For example you could download data for Canada or Ontario.
+Another handy resource offers downloads in a format that might be more familiar to the typical GISer. [GeoFabrik](https://www.geofabrik.de/) is a German geospatial company which offers OSM [downloads](https://download.geofabrik.de/) in both compressed XLM (`.osm.pbf`) and _shapefile_ format, packaged into chunks split up by major regional and political boundaries. For example you could download data within [North America](https://download.geofabrik.de/north-america.html), [Canada](https://download.geofabrik.de/north-america/canada.html) or [Ontario](https://download.geofabrik.de/north-america/canada/ontario.html).
 
-Shapefiles, like Ginko trees and horseshoe crabs, are surprisingly ancient things somehow still living among us. They're a tabular file format (that is, data in the form of a _table_), where each entity (node, way, relation) is a row and each tag is a column. Because there are many, many tags, and most entities have only a few of them, most entries in the table are null and not all tags can be accommodated. This is why the Geofabrik shapefiles only include the most common tags. Shapefiles also must keep different geometry types separate, meaning there will be separate files for point, line, and polygon geometries.
+Shapefiles are a very common format for spatial data which, like Ginko trees and horseshoe crabs, are a surprisingly ancient thing somehow still living among us. They're tabular file format (that is, data in the form of a _table_), where each entity (node, way, relation) is a row and each tag is a column. Because there are many, many tags, and most entities have only a few of them, most entries in the table are null and not all tags can be accommodated. Thus, the Geofabrik shapefiles can only include the most common tags. Shapefiles also must keep different geometry types separate, meaning there will be separate files for point, line, and polygon geometries.
 
-These downloads can be a good entry point into OSM data if you're already comfortable working with shapefiles but the file format limits what you can do with the data. If you want to make a quick map without worrying too much about the nuances of the data structure, this is probably what you want. 
+These downloads can be a good entry point into OSM data if you're already comfortable working with shapefiles but the file format limits what you can do with the data. If you want to make a quick map without worrying too much about the nuances of the data structure, this is probably what you want.
 
 ## Some examples and applications
 
