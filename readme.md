@@ -161,7 +161,28 @@ Fortunately, OSM as a community has a variety of resources to fill the gaps for 
 
 #### The Overpass API
 
-Perhaps the most versatile of these community sources is the Overpass API. Overpass allows you to query the database in a great variety of ways using its own OSM-specific query language. To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it.
+Perhaps the most versatile of these community sources is the [Overpass API](https://overpass-turbo.eu/). Overpass allows you to query the database in a great variety of ways using its own OSM-specific query language. To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it. Here's a really simple example (with a lot of comments) to give you a flavour of it.
+
+```overpass
+[out:json][timeout:5][bbox:{{bbox}}];
+// This is a comment. The lines above tell overpass to
+// 1. return results as JSON
+// 2. give up after 10 seconds if the query hasn't finished (lets the server plan better)
+// 3. search only within the current map view
+
+// gather results and store in .elements variable
+(
+    // the parentheses unions nodes and ways together
+    node[shop=wool]; // collects any ways with these tags
+    way[shop=wool]; // collects any nodes...
+) -> .elements;
+// output resulting geometries (and tags)
+.elements out geom;
+```
+
+Go to the [Overpass API](https://overpass-turbo.eu/) and pop that query text in the sidebar. Zoom out until you can see your whole country and hit "run". You should see a few scattered nodes show up on the map. Congrats! You just efficiently searched the many gigabytes of data within your map view for all the shops that sell yarn. Brits, by the way, call all sorts of yarn "wool", which can be quite confusing for people trying to knit with alpaca or acrylic fibres, but recall what I said earlier about tags always being in British English.
+
+Now click the "export" tab to download the data in a variety of formats. If you wanted to quickly make a map with this in a standard desktop GIS, GeoJSON would be a good, straightforward choice. You could just drag this straight into QGIS and begin styling the layers.
 
 Personally, I often use Overpass to download fresh (delayed by just a minute or two) city or metro level data. There's actually a link for this directly on [openstreetmap.org](https://openstreetmap.org), which will download everything within the current (rectangular) map view as an XML file. Give it a try! Zoom to your city or neighborhood, go to the "export" option, and select "Overpass API" in the sidebar to download. If you go too big (e.g. all of Europe), the API will timeout and throw an error. 
 
