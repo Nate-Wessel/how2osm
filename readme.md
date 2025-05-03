@@ -208,7 +208,7 @@ These downloads can be a good entry point into OSM data if you're already comfor
 
 To make edits, you'll need to create an OSM account. You can sign up or log in using the buttons on the top right of the page at [openstreetmap.org](https://www.openstreetmap.org).
 
-Once you have an account, there are a few different ways of making edits. The most accessible and beginner friendly is the *iD editor*, which is built right into the webpage at . It has a lot of useful features that help you find good descriptive tags for whatever you're adding, but it can be pretty limited in its ability to make larger or more complex edits. It's definitely the best place to start.
+Once you have an account, there are a few different ways of making edits. The most accessible and beginner friendly is the *iD editor*, which is built right into the webpage. It has a lot of useful features that help you find good descriptive tags for whatever you're adding, but it can be pretty limited in its ability to make larger or more complex edits. It's definitely the best place to start.
 
 I'll also talk briefly about the *JOSM editor*, which is my usual go-to. It's a much more powerful desktop GIS software that will let you do just about anything, but without a lot of the guardrails provided for newer uses by *iD*. 
 
@@ -216,7 +216,7 @@ These aren't the only editors though. Just as there are many ways to download da
 
 #### The ID editor
 
-The iD editor is the beginner-friendly editor built right into the page at [openstreetmap.org](https://www.openstreetmap.org). Just click "edit" in the top menu and you'll be able to edit the contents of the current map view.
+The iD editor is the beginner-friendly editor built right into the page at [openstreetmap.org](https://www.openstreetmap.org). Just click "edit" in the top menu and you'll be able to edit the contents of your current map view.
 
 For your first edit (you're following along, right?) I recommend starting in a rural or suburban area that you're at least somewhat familiar with. Unless the area you're in is very densely mapped already, you should able to find some features which aren't mapped yet. Once you're in editing mode, you'll see OSM's vector map data overlaid on top of some recent aerial imagery.
 
@@ -226,11 +226,13 @@ Pan the map until you find some clear features in the imagery that aren't yet ma
 
 ![The iD Editor, with a closed way (polygon) drawn but not tagged](./images/iD-polygon-drawn.png)
 
-I've now drawn the way, but not yet added any tags. On the left-hand panel, you can see iD suggesting some things this feature might be. I know this is a building, but not what kind of building it is. Maybe it's full of cows? Or it could be their private indoor hockey rink. Who knows. Scrolling through the options, I see "Building Features", click that, then select just "Building". I also could have used the search feature to get to the same result.
+I've now drawn the way, but not yet added any tags. On the left-hand panel, you can see iD suggesting some things this feature might be. I can tell this is a building, but not what kind of building it is. Maybe it's full of cows? Or it could be their private indoor hockey rink. Who knows. Scrolling through the options, I see "Building Features", click that, then select just "Building". I also could have used the search feature to get to the same result.
 
 ![The iD Editor, with a closed way (polygon) drawn and tagged](./images/iD-building.png)
 
-I can now see the tag I've added to this way (`building=yes`), along with some blanks for suggested tags that often accompany the `building=*` tag. For now, I'm happy with this edit and want to save it. I hit the "Save" button in the top right. Changes to the map are made in "changesets" and each one needs some description. I'll add a brief description for this simple edit, and also add a source from the drop-down selector. Adding a description and a source helps future editors understand something about the context of my edit.
+I can now see the tag I've added to this way (`building=yes`), along with some blanks for suggested tags that often accompany the `building=*` tag. For more information on any of these, you can click the "i" button to get a detailed description of the tag.
+
+For now, I'm happy with this edit and want to save it. I hit the "Save" button in the top right. Changes to the map are made in "changesets" and each one needs some description. I'll add a brief description for this simple edit, and also add a source from the drop-down selector. Adding a description and a source helps future editors understand something about the context of my edit.
 
 ![The iD Editor, saving a changeset](./images/iD-save.png)
 
@@ -238,7 +240,9 @@ Once you click the "Upload" button, your edit will be saved for all time in the 
 
 ![A recently uploaded changeset](./images/fresh-edit.png)
 
-You can see there's a bit of extra information added by the editor, such as the actual source of the aerial imagery I was looking at. Notice that the building I added doesn't actually show up on the main page's map yet. My edit has made it into the OSM database, but it takes a while for changes to be reflected across the OSM ecosystem, such as on the rendered map or in data downloaded from other sources like those discussed above. If you clicked "Edit" again in the same spot, you could confirm that your changes were saved.
+You can see there's a bit of extra information added by the editor, such as the actual source of the aerial imagery I was looking at. Notice that right after my edit, the building I added doesn't actually show up on the main page's map yet. My edit has made it into the OSM database, but it takes a while for changes to be reflected across the OSM ecosystem, such as on the rendered map or in data downloaded from other sources like those discussed above. By the time you're reading this, you'll see the building at the link above, assuming it hasn't been converted into a go-kart track by then.
+
+As for your edit, if you wanted to confirm that your changes were saved, you could edit the map again in the same spot and you should see your modified data there since the editors all pull data, hot and fresh, from the main OSM database.
 
 #### JOSM
 
@@ -249,17 +253,3 @@ While iD is the most popular OSM editor, and the best for beginners, you should 
 For confident and experienced editors JOSM is a great tool but it can also be overwhelming and it counts on the user to know what they're doing to a pretty large degree. While most individual OSM editors use iD, most actual map edits are made in JOSM.
 
 To give an example, one important way of using JOSM is for [data imports](https://wiki.openstreetmap.org/wiki/Import). Now first of all, one does not simply import data into OSM from other sources. Imports are a long, arduous journey of a process involving much discussion with the community, whose consensus and approval is required, and a very thorough review of data licensing and permissions. But once an import process is underway, JOSM could be used to bring in hundreds or even thousands of features at a time, while checking for conflicts with preexisting data.
-
-## Some examples and applications
-
-
-### Use OSM in a basemap
-* use pre-rendered tiles - free and easy context
-* or download and visualize data in QGIS - more custom
-
-### Perhaps a very specific example for querying overpass?
-
-### Network/graph analysis in Python?
-
-
-
