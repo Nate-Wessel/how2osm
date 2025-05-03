@@ -160,7 +160,7 @@ Fortunately, OSM as a community has a variety of resources to fill the gaps for 
 
 #### The Overpass API
 
-Perhaps the most versatile of these community sources is the [Overpass API](https://overpass-turbo.eu/). Overpass allows you to query the database in a great variety of ways using its own OSM-specific query language. To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it. Here's a really simple example to give you a flavour of it.
+Perhaps the most versatile of these community sources is the [Overpass API](https://overpass-turbo.eu/). Overpass allows you to query the database in a great variety of ways using its own [OSM-specific query language](https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL). To be honest this can quickly get really complicated outside of some relatively simple use-cases, but it's a really powerful tool if you're willing to learn it. Here's a really simple example to give you a flavour of it.
 
 ```overpass
 [out:json][timeout:5][bbox:{{bbox}}];
@@ -206,17 +206,17 @@ Indeed. It's a big file, and you'll probably want to use some kind of program to
 
 Another handy resource offers downloads in a format that might be more familiar to the typical GISer. [GeoFabrik](https://www.geofabrik.de/) is a German geospatial company which offers OSM [downloads](https://download.geofabrik.de/) in both compressed XLM (`.osm.pbf`) and _shapefile_ format, packaged into chunks split up by major regional and political boundaries. For example you could download data within [North America](https://download.geofabrik.de/north-america.html), [Canada](https://download.geofabrik.de/north-america/canada.html) or [Ontario](https://download.geofabrik.de/north-america/canada/ontario.html).
 
-Shapefiles are a very common format for spatial data which, like Ginko trees and horseshoe crabs, are a surprisingly ancient thing somehow still living among us. They're tabular file format (that is, data in the form of a _table_), where each entity (node, way, relation) is a row and each tag is a column. Because there are many, many tags, and most entities have only a few of them not all tags can be accommodated. Thus, the Geofabrik shapefiles can only include the most common tags, and are split into just a few thematic groups like buildings, landuse, natural features, place names, points of interest, etc. Shapefiles also must keep different geometry types separate, meaning there will be separate files for point, line, and polygon geometries.
+Shapefiles are a very common format for spatial data which, like Ginko trees and horseshoe crabs, are a surprisingly ancient thing somehow still living among us. They're tabular file format (that is, data in the form of a _table_), where each tagged entity (node, way, relation) is a row and each tag is a column. Because there are many, many tags, and most entities have only a few of them not all tags can be accommodated. Thus, the Geofabrik shapefiles can only include the most common tags, and are split into just a few thematic groups like buildings, landuse, natural features, place names, points of interest, etc. Shapefiles also must keep different geometry types separate, meaning there will be separate files for point, line, and polygon geometries.
 
 These downloads can be a good entry point into OSM data if you're already comfortable working with shapefiles but the file format limits what you can do with the data. If you want to make a quick map of common features without worrying too much about the nuances of the data structure, this is probably what you want.
 
-![I was able to quickly make a map of the 2.9 million buildings mapped in Ontario so far](./images/QGIS-Ontario-buildings.png)
+![I was able to quickly make this map of the 2.9 million buildings mapped in Ontario so far](./images/QGIS-Ontario-buildings.png)
 
 ### Contributing edits
 
 To make edits, you'll need to create an OSM account. You can sign up or log in using the buttons on the top right of the page at [openstreetmap.org](https://www.openstreetmap.org).
 
-Once you have an account, there are a few different ways of making edits. The most accessible and beginner friendly is the *iD editor*, which is built right into the webpage. It has a lot of useful features that help you find good descriptive tags for whatever you're adding, but it can be pretty limited in its ability to make larger or more complex edits. It's definitely the best place to start.
+Once you have an account, there are a few different ways of making edits. The most accessible and beginner friendly is the *iD editor*, which is built right into [openstreetmap.org](https://www.openstreetmap.org). It has a lot of useful features that help you find good descriptive tags for whatever you're adding, but it can be pretty limited in its ability to make larger or more complex edits. It's definitely the best place to start.
 
 I'll also talk briefly about the *JOSM editor*, which is my usual go-to. It's a much more powerful desktop GIS software that will let you do just about anything, but without a lot of the guardrails provided for newer uses by *iD*. 
 
@@ -238,9 +238,9 @@ I've now drawn the way, but not yet added any tags. On the left-hand panel, you 
 
 ![The iD Editor, with a closed way (polygon) drawn and tagged](./images/iD-building.png)
 
-I can now see the tag I've added to this way (`building=yes`), along with some blanks for suggested tags that often accompany the `building=*` tag. For more information on any of these, you can click the "i" button to get a detailed description of the tag.
+I can now see the tag I've added to this way (`building=yes`), along with some blanks for suggested tags that often accompany the `building=*` tag. For more information on any of these, you can click the "i" button to get a detailed description of each tag. It's OK to leave these tags blank.
 
-For now, I'm happy with this edit and want to save it. I hit the "Save" button in the top right. Changes to the map are made in "changesets" and each one needs some description. I'll add a brief description for this simple edit, and also add a source from the drop-down selector. Adding a description and a source helps future editors understand something about the context of my edit.
+For now, I'm happy with this edit and want to save it. I hit the "Save" button in the top right. Changes to the map are made in "changesets" and each one needs some description. I'll add a brief description for this simple edit, and also add a source for the information I've added, selected from the drop-down selector. Adding a description and a source helps future editors understand something about the context of my edit.
 
 ![The iD Editor, saving a changeset](./images/iD-save.png)
 
