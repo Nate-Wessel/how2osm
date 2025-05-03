@@ -124,12 +124,9 @@ Just as it's a strength that the wise cartographer can add their wisdom to the m
 
 One example that comes to mind is the border between India and China. It's a very large and complex boundary that neither country actually agrees on. OSM has a nuanced way of tagging [disputed political boundaries](https://wiki.openstreetmap.org/wiki/Disputed_territories), but I found that in practice the boundary relations for each country would often break down (i.e. fail to be a closed polygon) because novice editors didn't understand this complexity. I shouldn't have to have to fix China and re-download the data every fifth time I make a map of the region.
 
-## Contribute and access the data
-* OSM is a big online database
+## Access the data and contribute edits
 
-### Contributing edits
-* ID editor
-* JOSM
+OSM is just a big online database and you can connect to it to both read (download) data and edit (contribute) data. I'll start by describing the download process, but you'll want to make sure you give editing a try too. Even if you think you'll only ever download data, I've found that, first of all, whatever you're doing, you're going to find some data that just needs to be fixed, and who better to do it than you? Second, editing puts you in the shoes of the people who make all the data in the first place. There's just no better way to understand what you're working with than to be part of the process of making it.
 
 ### Downloading data
 
@@ -206,6 +203,46 @@ Shapefiles are a very common format for spatial data which, like Ginko trees and
 These downloads can be a good entry point into OSM data if you're already comfortable working with shapefiles but the file format limits what you can do with the data. If you want to make a quick map of common features without worrying too much about the nuances of the data structure, this is probably what you want.
 
 ![I was able to quickly make a map of the 2.9 million buildings mapped in Ontario so far](./images/QGIS-Ontario-buildings.png)
+
+### Contributing edits
+
+To make edits, you'll need to create an OSM account. You can sign up or log in using the buttons on the top right of the page at [openstreetmap.org](https://www.openstreetmap.org).
+
+Once you have an account, there are a few different ways of making edits. The most accessible and beginner friendly is the *iD editor*, which is built right into the webpage at . It has a lot of useful features that help you find good descriptive tags for whatever you're adding, but it can be pretty limited in its ability to make larger or more complex edits. It's definitely the best place to start.
+
+I'll also talk briefly about the *JOSM editor*, which is my usual go-to. It's a much more powerful desktop GIS software that will let you do just about anything, but without a lot of the guardrails provided for newer uses by *iD*. 
+
+These aren't the only editors though. Just as there are many ways to download data, contributed by the OSM community, there are many ways to edit it.
+
+#### The ID editor
+
+The iD editor is the beginner-friendly editor built right into the page at [openstreetmap.org](https://www.openstreetmap.org). Just click "edit" in the top menu and you'll be able to edit the contents of the current map view.
+
+For your first edit (you're following along, right?) I recommend starting in a rural or suburban area that you're at least somewhat familiar with. Unless the area you're in is very densely mapped already, you should able to find some features which aren't mapped yet. Once you're in editing mode, you'll see OSM's vector map data overlaid on top of some recent aerial imagery.
+
+![The iD Editor, panning through rural Ontario](./images/iD-editor.png)
+
+Pan the map until you find some clear features in the imagery that aren't yet mapped. In the example above, I found some large buildings around what looks like a rural homestead (with a private basketball court??). To add the large building with the white roof as a polygon, I'll click on the "Area" button at the top, then click on each of the four corners of the building, double-clicking on the last one to close out the polygon.
+
+![The iD Editor, with a closed way (polygon) drawn but not tagged](./images/iD-polygon-drawn.png)
+
+I've now drawn the way, but not yet added any tags. On the left-hand panel, you can see iD suggesting some things this feature might be. I know this is a building, but not what kind of building it is. Maybe it's full of cows? Or it could be their private indoor hockey rink. Who knows. Scrolling through the options, I see "Building Features", click that, then select just "Building". I also could have used the search feature to get to the same result.
+
+![The iD Editor, with a closed way (polygon) drawn and tagged](./images/iD-building.png)
+
+I can now see the tag I've added to this way (`building=yes`), along with some blanks for suggested tags that often accompany the `building=*` tag. For now, I'm happy with this edit and want to save it. I hit the "Save" button in the top right. Changes to the map are made in "changesets" and each one needs some description. I'll add a brief description for this simple edit, and also add a source from the drop-down selector. Adding a description and a source helps future editors understand something about the context of my edit.
+
+![The iD Editor, saving a changeset](./images/iD-save.png)
+
+Once you click the "Upload" button, your edit will be saved for all time in the OSM database. Be sure you haven't done anything too silly, or added your banking information to the changeset comment. Here's the edit I just made: [https://www.openstreetmap.org/changeset/165765315](https://www.openstreetmap.org/changeset/165765315).
+
+![A recently uploaded changeset](./images/fresh-edit.png)
+
+You can see there's a bit of extra information added by the editor, such as the actual source of the aerial imagery I was looking at. Notice that the building I added doesn't actually show up on the main page's map yet. My edit has made it into the OSM database, but it takes a while for changes to be reflected across the OSM ecosystem, such as on the rendered map or in data downloaded from other sources like those discussed above. If you clicked "Edit" again in the same spot, you could confirm that your changes were saved.
+
+#### JOSM
+
+
 
 ## Some examples and applications
 
