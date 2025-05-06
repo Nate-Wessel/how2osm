@@ -8,7 +8,11 @@ I mean only to tease and entice here. OpenStreetMap is a deep, _deep_ resource a
 
 ## What is OpenStreetMap?
 
-OpenStreetMap (OSM) is a world-wide, collaborative mapping project spanning a huge range of subjects. You might think of it as Wikipedia, if Wikipedia were a map instead of a written body of text. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
+OpenStreetMap (OSM) is a world-wide, collaborative mapping project spanning a huge range of subjects.
+
+![The homepage of OpenStreetMap.org](./images/OpenStreetMap.org.png)
+
+You might think of it as Wikipedia, if Wikipedia were a map instead of a written body of text. Anyone with a computer can contribute edits and can also download and use that data, along with the contributions of millions of others, for a wide range of uses. [Specifically](https://www.openstreetmap.org/copyright):
 
 > You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full [legal code](https://opendatacommons.org/licenses/odbl/1.0/) explains your rights and responsibilities.
 
